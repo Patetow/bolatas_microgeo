@@ -1,0 +1,894 @@
+
+/* Cuerpo de la página (contenido)*/
+@media (max-width: 768px) {  
+    body {
+        background: white;
+        display: grid;
+        flex-direction: column;
+        margin: 0;
+        position: relative;
+        min-height: 100vh;
+        grid-template-rows: auto 1fr auto;
+    }
+    
+    /* Container general pag */
+    .container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding-top: 10px;
+    }
+    
+    /* Fondo del navbar */
+    .border-dark {
+        background: #1F1C2C;
+        background: -webkit-linear-gradient(to right, #928DAB, #1F1C2C);
+        background: linear-gradient(to right, #928DAB, #1F1C2C);
+    }
+    
+    /* Container navbar */
+    .na-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding-top: 10px;
+        padding-bottom: 10px;
+    }
+    
+    /* Estilos para el mensaje de bienvenida */
+    .welcome-text {
+        float: left;
+        color: #928DAB;
+        margin-top: 8px;
+    }
+    
+    /* Ajustes cards admin */
+    .card-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-bottom: 80px;
+        margin-top: 60px;
+        justify-content: space-between;
+        /* Agregar esta línea */
+    }
+    
+    .card_agregar_usuario {
+        width: 250px;
+        /* Ajusta el ancho */
+        height: 400px;
+        background: #1F1C2C;
+        background: -webkit-linear-gradient(to right, #928DAB, #1F1C2C);
+        background: linear-gradient(to right, #928DAB, #1F1C2C);
+        color: #fff;
+        /* Color del texto en las tarjetas */
+        padding: 10px;
+        /* Espaciado interno en el contenido de la tarjeta */
+        border-radius: 10px;
+        /* Bordes redondeados */
+        margin: auto;
+        /* Centra horizontalmente y verticalmente */
+    }
+    
+    .card_crear_noticia {
+        width: 250px;
+        /* Ajusta el ancho */
+        height: 400px;
+        background: #1F1C2C;
+        background: -webkit-linear-gradient(to right, #928DAB, #1F1C2C);
+        background: linear-gradient(to right, #928DAB, #1F1C2C);
+        color: #fff;
+        /* Color del texto en las tarjetas */
+        padding: 10px;
+        /* Espaciado interno en el contenido de la tarjeta */
+        border-radius: 10px;
+        /* Bordes redondeados */
+        margin: auto;
+        /* Centra horizontalmente y verticalmente */
+        overflow: auto;
+    }
+    
+    /* Tamaño de las cards */
+    .card {
+        width: 250px;
+        /* Ajusta el ancho */
+        height: 500px;
+        background: #1F1C2C;
+        background: -webkit-linear-gradient(to right, #928DAB, #1F1C2C);
+        background: linear-gradient(to right, #928DAB, #1F1C2C);
+        color: #fff;
+        /* Color del texto en las tarjetas */
+        padding: 10px;
+        /* Espaciado interno en el contenido de la tarjeta */
+        border-radius: 10px;
+        /* Bordes redondeados */
+    }
+    
+    .card-title {
+        font-size: 18px;
+        /* Tamaño del título */
+        font-weight: bold;
+        /* Estilo de fuente en negrita */
+        margin-bottom: 10px;
+        /* Espaciado inferior para el título */
+    }
+    
+    .card-text {
+        font-size: 14px;
+        /* Tamaño del texto */
+        max-height: 150px;
+        /* Altura máxima para el texto */
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+    
+    /* Boton card */
+    .btn-primary {
+        background-color: #928DAB;
+    }
+    
+    /* Inicio sesion y registro */
+    .formulario-container {
+        width: 400px;
+        margin: 0 auto;
+        padding: 20px;
+        border: 2px solid #ccc;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        background: #1F1C2C;
+        background: -webkit-linear-gradient(to right, #928DAB, #1F1C2C);
+        background: linear-gradient(to right, #928DAB, #1F1C2C);
+        margin-bottom: 70px;
+        margin-top: 70px;
+    
+    }
+    
+    .bienvenido-message {
+        font-size: 24px;
+        font-weight: bold;
+        color: #fff;
+        text-align: center;
+        list-style: none;
+    }
+    
+    a {
+        color: white;
+    
+    }
+    
+    h2 {
+        font-size: 24px;
+        color: white;
+        text-align: center;
+        margin-top: 20px;
+        font-weight: bold;
+    }
+    
+    p {
+        color: white;
+    }
+    
+    .form-group {
+        display: flex;
+        flex-direction: column;
+        margin: 10px 0;
+    }
+    
+    label {
+        margin-bottom: 5px;
+        font-size: 18px;
+        color: white;
+    }
+    
+    input[type="email"],
+    input[type="password"] {
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+    }
+    
+    /* Fin Inicio sesion y registro */
+    
+    /* color letras del navbar */
+    .nav-link {
+        color: white;
+    }
+    
+    /* CARROUSEL */
+    .carousel {
+        /* Establece un margen a los lados del carrusel */
+        padding-bottom: 20px;
+        padding-top: 20px;
+    }
+    
+    /* Establece un margen a los lados del carrusel */
+    #carouselExampleIndicators {
+        max-width: 80%;
+        /* Reducir al 80% del ancho del contenedor */
+        margin: 0 auto;
+        /* Centrar el carrusel horizontalmente */
+    }
+    
+    /* FIN CARROUSEL */
+    
+    /* Estilos del footer */
+    footer {
+        background: #1F1C2C;
+        background: -webkit-linear-gradient(to right, #928DAB, #1F1C2C);
+        background: linear-gradient(to right, #928DAB, #1F1C2C);
+        color: #fff;
+        padding-top: 0px;
+        text-align: center;
+    }
+    
+    .footer-content {
+        display: flex;
+        justify-content: space-between;
+        max-width: 1200px;
+        padding: 10px;
+    }
+    
+    .footer-logo h2 {
+        font-size: 18px;
+        margin: 0;
+    }
+    
+    .footer-links ul {
+        list-style-type: none;
+        padding: 0;
+    }
+    
+    .footer-links li {
+        margin-bottom: 10px;
+    }
+    
+    .footer-links a {
+        text-decoration: none;
+        color: #fff;
+    }
+    
+    .footer-contact p {
+        margin: 0;
+        margin-bottom: 10px;
+    }
+    
+    .footer-bottom {
+        background: #1F1C2C;
+        background: -webkit-linear-gradient(to right, #928DAB, #1F1C2C);
+        background: linear-gradient(to right, #928DAB, #1F1C2C);
+    
+        text-align: center;
+        padding: 10px;
+    }
+    
+    .footer-bottom p {
+        margin: 0;
+        color: #fff;
+        font-size: 12px;
+    }
+    
+    li a {
+        text-decoration: none;
+        color: #0073e6;
+        font-weight: bold;
+        font-size: 15px;
+    }
+    
+    /* Fin estilos del footer */
+    
+    /* PERFIL USUARIO */
+    .contenedor {
+        text-align: center;
+        margin: 20px auto;
+        max-width: 400px;
+        padding: 20px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        background: #1F1C2C;
+        background: -webkit-linear-gradient(to right, #928DAB, #1F1C2C);
+        background: linear-gradient(to right, #928DAB, #1F1C2C);
+    }
+    
+    .perfil {
+        text-align: center;
+    }
+    
+    .perfil img {
+        width: 150px;
+        height: 150px;
+        border-radius: 50%;
+        object-fit: cover;
+    }
+    
+    .perfil h1 {
+        font-size: 24px;
+        margin: 10px 0;
+        color: white;
+    }
+    
+    .perfil p {
+        font-size: 16px;
+        margin: 5px 0;
+        color: white;
+    }
+    
+    .config-button {
+        width: 40px;
+        height: 40px;
+        background-color: transparent;
+        border: none;
+        cursor: pointer;
+        font-size: 20px;
+        color: black;
+    
+    }
+    
+    .button-link {
+        display: inline-block;
+        border: 1px solid #ccc;
+        padding: 5px;
+        border-radius: 10px;
+    }
+    
+    
+    /* FIN PERFIL DE USUARIO */
+    
+    /* FORMULARIOS PERFIL USUARIO */
+    .form-container {
+        width: 1200px;
+        margin: 0 auto;
+        padding: 20px;
+        border: 2px solid #ccc;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        background: #1F1C2C;
+        background: -webkit-linear-gradient(to right, #928DAB, #1F1C2C);
+        background: linear-gradient(to right, #928DAB, #1F1C2C);
+        margin-bottom: 70px;
+        margin-top: 70px;
+        display: flex;
+        /* Para mostrar los contenedores uno al lado del otro */
+        justify-content: space-between;
+        /* Para separarlos horizontalmente */
+    }
+    
+    .form-box {
+        width: 800%;
+        /* Ancho del contenedor del formulario */
+        padding: 10px;
+        /* Agrega espacio alrededor de cada formulario */
+        border: 1px solid #ccc;
+        /* Puedes agregar un borde opcional para separarlos visualmente */
+        margin: 50px;
+        /* Espacio entre los contenedores */
+    }
+    
+    h2 {
+        font-size: 24px;
+        color: white;
+        text-align: center;
+        margin-top: 20px;
+        font-weight: bold;
+    }
+    
+    p {
+        color: white;
+    }
+    
+    .form-group {
+        display: flex;
+        flex-direction: column;
+        margin: 10px 0;
+    }
+    
+    label {
+        margin-bottom: 5px;
+        font-size: 18px;
+        color: white;
+    }
+    
+    input[type="text"],
+    input[type="password"] {
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+    }
+    
+    /* FIN FORMULARIOS PERFIL USUARIO */
+    
+    /* IMAGEN INICIO */
+    .imginicio-container {
+        display: flex;
+        align-items: center;
+    }
+    
+    .bienvenida-image {
+        width: 800px;
+        height: auto;
+        margin-left: 100px;
+    }
+    
+    /* FIN IMAGEN INICIO */
+    
+    /* ADMIN ARREGLOS */
+    .bg-primary {
+        background: #1F1C2C;
+        background: -webkit-linear-gradient(to right, #928DAB, #1F1C2C);
+        background: linear-gradient(to right, #928DAB, #1F1C2C);
+    }
+    
+    /* FIN ADMIN ARREGLOS */
+    
+    .scrollable-section {
+        width: 100%;
+        /* Ajusta el ancho según tus necesidades */
+        height: 300px;
+        /* Ajusta la altura según tus necesidades */
+        overflow: auto;
+        /* Agrega barras de desplazamiento si es necesario */
+    }
+    
+    .notif-container {
+        border: 1px solid black;
+        background: #1F1C2C;
+        background: -webkit-linear-gradient(to right, #928DAB, #1F1C2C);
+        background: linear-gradient(to right, #928DAB, #1F1C2C);
+        padding: 15px;
+        width: 300px;
+        margin: 0 auto;
+    }
+    
+    #map-container {
+        width: 100%;
+        height: 300px;
+        border: 1px solid #ccc;
+        margin-bottom: 15px;
+    }
+}
+
+
+body {
+    background: white;
+    display: grid;
+    flex-direction: column;
+    margin: 0;
+    position: relative;
+    min-height: 100vh;
+    grid-template-rows: auto 1fr auto;
+}
+
+/* Container general pag */
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 10px;
+}
+
+/* Fondo del navbar */
+.border-dark {
+    background: #1F1C2C;
+    background: -webkit-linear-gradient(to right, #928DAB, #1F1C2C);
+    background: linear-gradient(to right, #928DAB, #1F1C2C);
+}
+
+/* Container navbar */
+.na-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+/* Estilos para el mensaje de bienvenida */
+.welcome-text {
+    float: left;
+    color: #928DAB;
+    margin-top: 8px;
+}
+
+/* Ajustes cards admin */
+.card-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 80px;
+    margin-top: 60px;
+    justify-content: space-between;
+    /* Agregar esta línea */
+}
+
+.card_agregar_usuario {
+    width: 250px;
+    /* Ajusta el ancho */
+    height: 400px;
+    background: #1F1C2C;
+    background: -webkit-linear-gradient(to right, #928DAB, #1F1C2C);
+    background: linear-gradient(to right, #928DAB, #1F1C2C);
+    color: #fff;
+    /* Color del texto en las tarjetas */
+    padding: 10px;
+    /* Espaciado interno en el contenido de la tarjeta */
+    border-radius: 10px;
+    /* Bordes redondeados */
+    margin: auto;
+    /* Centra horizontalmente y verticalmente */
+}
+
+.card_crear_noticia {
+    width: 250px;
+    /* Ajusta el ancho */
+    height: 400px;
+    background: #1F1C2C;
+    background: -webkit-linear-gradient(to right, #928DAB, #1F1C2C);
+    background: linear-gradient(to right, #928DAB, #1F1C2C);
+    color: #fff;
+    /* Color del texto en las tarjetas */
+    padding: 10px;
+    /* Espaciado interno en el contenido de la tarjeta */
+    border-radius: 10px;
+    /* Bordes redondeados */
+    margin: auto;
+    /* Centra horizontalmente y verticalmente */
+    overflow: auto;
+}
+
+/* Tamaño de las cards */
+.card {
+    width: 250px;
+    /* Ajusta el ancho */
+    height: 500px;
+    background: #1F1C2C;
+    background: -webkit-linear-gradient(to right, #928DAB, #1F1C2C);
+    background: linear-gradient(to right, #928DAB, #1F1C2C);
+    color: #fff;
+    /* Color del texto en las tarjetas */
+    padding: 10px;
+    /* Espaciado interno en el contenido de la tarjeta */
+    border-radius: 10px;
+    /* Bordes redondeados */
+}
+
+.card-title {
+    font-size: 18px;
+    /* Tamaño del título */
+    font-weight: bold;
+    /* Estilo de fuente en negrita */
+    margin-bottom: 10px;
+    /* Espaciado inferior para el título */
+}
+
+.card-text {
+    font-size: 14px;
+    /* Tamaño del texto */
+    max-height: 150px;
+    /* Altura máxima para el texto */
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* Boton card */
+.btn-primary {
+    background-color: #928DAB;
+}
+
+/* Inicio sesion y registro */
+.formulario-container {
+    width: 400px;
+    margin: 0 auto;
+    padding: 20px;
+    border: 2px solid #ccc;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    background: #1F1C2C;
+    background: -webkit-linear-gradient(to right, #928DAB, #1F1C2C);
+    background: linear-gradient(to right, #928DAB, #1F1C2C);
+    margin-bottom: 70px;
+    margin-top: 70px;
+
+}
+
+.bienvenido-message {
+    font-size: 24px;
+    font-weight: bold;
+    color: #fff;
+    text-align: center;
+    list-style: none;
+}
+
+a {
+    color: white;
+
+}
+
+h2 {
+    font-size: 24px;
+    color: white;
+    text-align: center;
+    margin-top: 20px;
+    font-weight: bold;
+}
+
+p {
+    color: white;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    margin: 10px 0;
+}
+
+label {
+    margin-bottom: 5px;
+    font-size: 18px;
+    color: white;
+}
+
+input[type="email"],
+input[type="password"] {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+/* Fin Inicio sesion y registro */
+
+/* color letras del navbar */
+.nav-link {
+    color: white;
+}
+
+/* CARROUSEL */
+.carousel {
+    /* Establece un margen a los lados del carrusel */
+    padding-bottom: 20px;
+    padding-top: 20px;
+}
+
+/* Establece un margen a los lados del carrusel */
+#carouselExampleIndicators {
+    max-width: 80%;
+    /* Reducir al 80% del ancho del contenedor */
+    margin: 0 auto;
+    /* Centrar el carrusel horizontalmente */
+}
+
+/* FIN CARROUSEL */
+
+/* Estilos del footer */
+footer {
+    background: #1F1C2C;
+    background: -webkit-linear-gradient(to right, #928DAB, #1F1C2C);
+    background: linear-gradient(to right, #928DAB, #1F1C2C);
+    color: #fff;
+    padding-top: 0px;
+    text-align: center;
+}
+
+.footer-content {
+    display: flex;
+    justify-content: space-between;
+    max-width: 1200px;
+    padding: 10px;
+}
+
+.footer-logo h2 {
+    font-size: 18px;
+    margin: 0;
+}
+
+.footer-links ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.footer-links li {
+    margin-bottom: 10px;
+}
+
+.footer-links a {
+    text-decoration: none;
+    color: #fff;
+}
+
+.footer-contact p {
+    margin: 0;
+    margin-bottom: 10px;
+}
+
+.footer-bottom {
+    background: #1F1C2C;
+    background: -webkit-linear-gradient(to right, #928DAB, #1F1C2C);
+    background: linear-gradient(to right, #928DAB, #1F1C2C);
+
+    text-align: center;
+    padding: 10px;
+}
+
+.footer-bottom p {
+    margin: 0;
+    color: #fff;
+    font-size: 12px;
+}
+
+li a {
+    text-decoration: none;
+    color: #0073e6;
+    font-weight: bold;
+    font-size: 15px;
+}
+
+/* Fin estilos del footer */
+
+/* PERFIL USUARIO */
+.contenedor {
+    text-align: center;
+    margin: 20px auto;
+    max-width: 400px;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    background: #1F1C2C;
+    background: -webkit-linear-gradient(to right, #928DAB, #1F1C2C);
+    background: linear-gradient(to right, #928DAB, #1F1C2C);
+}
+
+.perfil {
+    text-align: center;
+}
+
+.perfil img {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.perfil h1 {
+    font-size: 24px;
+    margin: 10px 0;
+    color: white;
+}
+
+.perfil p {
+    font-size: 16px;
+    margin: 5px 0;
+    color: white;
+}
+
+.config-button {
+    width: 40px;
+    height: 40px;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    font-size: 20px;
+    color: black;
+
+}
+
+.button-link {
+    display: inline-block;
+    border: 1px solid #ccc;
+    padding: 5px;
+    border-radius: 10px;
+}
+
+
+/* FIN PERFIL DE USUARIO */
+
+/* FORMULARIOS PERFIL USUARIO */
+.form-container {
+    width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    border: 2px solid #ccc;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    background: #1F1C2C;
+    background: -webkit-linear-gradient(to right, #928DAB, #1F1C2C);
+    background: linear-gradient(to right, #928DAB, #1F1C2C);
+    margin-bottom: 70px;
+    margin-top: 70px;
+    display: flex;
+    /* Para mostrar los contenedores uno al lado del otro */
+    justify-content: space-between;
+    /* Para separarlos horizontalmente */
+}
+
+.form-box {
+    width: 800%;
+    /* Ancho del contenedor del formulario */
+    padding: 10px;
+    /* Agrega espacio alrededor de cada formulario */
+    border: 1px solid #ccc;
+    /* Puedes agregar un borde opcional para separarlos visualmente */
+    margin: 50px;
+    /* Espacio entre los contenedores */
+}
+
+h2 {
+    font-size: 24px;
+    color: white;
+    text-align: center;
+    margin-top: 20px;
+    font-weight: bold;
+}
+
+p {
+    color: white;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    margin: 10px 0;
+}
+
+label {
+    margin-bottom: 5px;
+    font-size: 18px;
+    color: white;
+}
+
+input[type="text"],
+input[type="password"] {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+/* FIN FORMULARIOS PERFIL USUARIO */
+
+/* IMAGEN INICIO */
+.imginicio-container {
+    display: flex;
+    align-items: center;
+}
+
+.bienvenida-image {
+    width: 800px;
+    height: auto;
+    margin-left: 100px;
+}
+
+/* FIN IMAGEN INICIO */
+
+/* ADMIN ARREGLOS */
+.bg-primary {
+    background: #1F1C2C;
+    background: -webkit-linear-gradient(to right, #928DAB, #1F1C2C);
+    background: linear-gradient(to right, #928DAB, #1F1C2C);
+}
+
+/* FIN ADMIN ARREGLOS */
+
+.scrollable-section {
+    width: 100%;
+    /* Ajusta el ancho según tus necesidades */
+    height: 300px;
+    /* Ajusta la altura según tus necesidades */
+    overflow: auto;
+    /* Agrega barras de desplazamiento si es necesario */
+}
+
+.notif-container {
+    border: 1px solid black;
+    background: #1F1C2C;
+    background: -webkit-linear-gradient(to right, #928DAB, #1F1C2C);
+    background: linear-gradient(to right, #928DAB, #1F1C2C);
+    padding: 15px;
+    width: 300px;
+    margin: 0 auto;
+}
+
+#map-container {
+    width: 100%;
+    height: 300px;
+    border: 1px solid #ccc;
+    margin-bottom: 15px;
+}
