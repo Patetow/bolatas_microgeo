@@ -40,19 +40,21 @@
                 </svg>
             </a>
         </section>
+        <div class="container">
+            <li class="nav-item">
+                <a class="nav-item btn btn-danger" href="{{url_for('logout')}}">Cerrar Sesión</a>
+            </li>
+        </div>
     </nav>
     <!-- FIN NAVBAR -->
 
 
-    <div class="container">
+    <div class="container pt-5 pb-5">
         <section class="row gap-3 justify-content-center offset-4 col-4 p-3 bg-light border border-secondary rounded">
             <button class="btn btn-primary" type="button">
                 <a class="text-white" href="{{ url_for('registrar_boleta') }}" >
                     registrar boleta
                 </a>
-            </button>
-            <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
-                Registrar Objeto
             </button>
         </section>
     </div>

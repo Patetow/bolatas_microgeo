@@ -1,31 +1,23 @@
-<html lang="en">
-
-
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Home</title>
-
-    <!-- BOOTSTRAP-->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
-
-    <!-- JS-->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.min.js"></script>
-
-
-    <!-- CSS -->
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/estilo.css') }}">
-
-
-
-</head>
-
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+        <title>Home</title>
+    
+        <!-- BOOTSTRAP-->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
+            integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+    
+        <!-- JS-->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.min.js"></script>
+    
+        <!-- CSS -->
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/estilo.css') }}">
+    </head>
 <body>
-
-    <!-- NAVBAR -->
     <nav class="navbar bg-danger fw-bold text-white" style="width: auto; height: 80px;" >
         <section class="container-fluid">
             <a href="{{ url_for('home') }}" class="logo">
@@ -44,213 +36,36 @@
                 </svg>
             </a>
         </section>
-
+        <div class="container">
+            
+                <a class="nav-item btn btn-danger" href="{{url_for('logout')}}">Cerrar Sesión</a>
+            
+        </div>
     </nav>
-    <!-- FIN NAVBAR -->
-
-    <!-- FORMULARIO -->
-
-
-    <div class="formulario-container">
-        <h2 class="text-white">Registro</h2>
-        <form action="{{ url_for('registro') }}" method="POST" id="registroForm">
-            <div class="form-group text-white">
-                <label for="nombre">Nombre:</label>
-                <input type="text" id="nombre" name="nombre" required>
-            </div>
-
-            <div class="form-group text-white">
-                <label for="apellido">Apellido:</label>
-                <input type="text" id="apellido" name="apellido" required>
-            </div>
-
-            <div class="form-group text-white">
-                <label for="email">Email:</label>
-                <input type="email" id="email" name="email" required>
-            </div>
-            <div class="form-group text-white">
-                <label for="rut">Rut sin puntos ni guión:</label>
-                <input type="text" id="inputRut" name="rut" required placeholder="Ingrese su RUT" maxlength="12">
-                <span id="mensajeValidacion"></span><br>
-            </div>
-
-            <div class="form-group text-white">
-                <label for="contrasena">Contraseña:</label>
-                <input type="password" id="contrasena" name="contrasena" required>
-            </div>
-
-            <button type="submit" class="btn btn-success">Registrarse</button>
-        </form>
-        <br>
-        <p class="text-white">¿Ya tienes una cuenta? <a href="{{ url_for('iniciosesion') }}">Iniciar sesión</a></p>
-    </div>
-
-    <!-- VALIDACION -->
-    <script>
-        document.getElementById("registroForm").addEventListener("submit", function (event) {
-            var nombre = document.getElementById("nombre").value;
-            var apellido = document.getElementById("apellido").value;
-            var email = document.getElementById("email").value;
-            var contrasena = document.getElementById("contrasena").value;
-
-            if (nombre.length < 3) {
-                alert("El nombre debe tener más de 3 caracteres.");
-                event.preventDefault();
-                return false;
-            }
-
-            if (apellido.length < 3) {
-                alert("El apellido debe tener más de 3 caracteres.");
-                event.preventDefault();
-                return false;
-            }
-
-            if (contrasena.length < 6 || !/[A-Z]/.test(contrasena) || !/\d/.test(contrasena)) {
-                alert("La contraseña debe tener al menos 6 caracteres, una letra mayúscula y números.");
-                event.preventDefault();
-                return false;
-            }
-
-
-            // Validar el formato del correo electrónico
-            var emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
-            if (!email.match(emailRegex)) {
-                alert("Por favor, introduce un correo electrónico válido.");
-                event.preventDefault();
-                return false;
-            }
-
-            return true;
-        });
-    </script>
-
-<script>
-    function validarRut(rut) {
-        rut = rut.replace(/[.-]/g, '');
-        if (!/^[0-9]{7,8}[0-9Kk]$/.test(rut)) {
-            return false;
-        }
-        var dv = rut.slice(-1).toUpperCase();
-        var rutSinDV = parseInt(rut.slice(0, -1), 10);
-        var suma = 0;
-        var multiplo = 2;
+    <h1>Panel de Administrador</h1>
     
-        while (rutSinDV > 0) {
-            suma += (rutSinDV % 10) * multiplo;
-            rutSinDV = Math.floor(rutSinDV / 10);
-            multiplo = multiplo === 7 ? 2 : multiplo + 1;
-        }
-    
-        var resultado = 11 - (suma % 11);
-        var dvEsperado = resultado === 11 ? '0' : resultado === 10 ? 'K' : resultado.toString();
-    
-        return dv === dvEsperado;
-    }
-    
-    document.getElementById('inputRut').addEventListener('input', function() {
-        var rut = this.value.trim();
-        var mensaje = document.getElementById('mensajeValidacion');
-        
-        if (validarRut(rut)) {
-            mensaje.textContent = 'RUT válido';
-            mensaje.style.color = 'green';
-        } else {
-            mensaje.textContent = 'RUT inválido';
-            mensaje.style.color = 'red';
-        }
-    });
-    </script>
-
-
-
-<script>
-    function formatearRut(rut) {
-    rut = rut.replace(/[.-]/g, ''); // Elimina puntos y guiones si ya existen
-
-    // Extrae el dígito verificador
-    var dv = rut.slice(-1);
-    rut = rut.slice(0, -1);
-
-    var rutFormateado = '';
-    var contador = 0;
-
-    // Recorre el RUT de atrás hacia adelante para agregar puntos
-    for (var i = rut.length - 1; i >= 0; i--) {
-        rutFormateado = rut.charAt(i) + rutFormateado;
-        contador++;
-
-        if (contador === 3 && i !== 0) {
-            rutFormateado = '.' + rutFormateado;
-            contador = 0;
-        }
-    }
-
-    // Agrega el dígito verificador al final
-    rutFormateado += '-' + dv;
-
-    return rutFormateado;
-}
-
-document.getElementById('inputRut').addEventListener('input', function() {
-    var rut = this.value.trim();
-    var mensaje = document.getElementById('mensajeValidacion');
-    var rutFormateado = formatearRut(rut);
-
-    this.value = rutFormateado; // Establece el valor formateado en el input
-
-    if (validarRut(rut)) {
-        mensaje.textContent = 'RUT válido';
-        mensaje.style.color = 'green';
-    } else {
-        mensaje.textContent = 'RUT inválido';
-        mensaje.style.color = 'red';
-    }
-});
-</script>
-
-
-    <!-- FIN VALIDACION -->
-
-    <!-- FOOTER -->
-    <footer>
-        <div class="footer-content container  pt-2">
-            <div class="row">
-                <div class="col-md-4">
-                    <div class="footer-logo">
-                        <h2>Junta de Vecinos de Huechuraba</h2>
-                        <br>
-                        <img src="{{ url_for('static', filename='img/logojv.PNG') }}" alt="logo" width="100"
-                            height="100">
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="footer-links">
-                        <img src="{{ url_for('static', filename='img/politica.png') }}" alt="logo" width="40"
-                            height="40">
-
-                        <ul>
-                            <li><a href="#">Cookies</a></li>
-                            <li><a href="#">Aviso legal</a></li>
-                            <li><a href="#">Política de privacidad</a></li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="footer-contact">
-                        <img src="{{ url_for('static', filename='img/fono.png') }}" alt="logo" width="40" height="40">
-                        <img src="{{ url_for('static', filename='img/sobre.png') }}" alt="logo" width="40" height="40">
-                        <p>Email: juntavecinosh2023@gmail.com</p>
-                        <p>Teléfono: +569 50314041</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="footer-bottom">
-            <p>&copy; 2023 Junta de Vecinos | Todos Los Derechos Reservados</p>
-        </div>
-    </footer>
-    <!-- FIN FOOTER -->
-
+    <h2>Boletas Registradas</h2>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Número de Orden</th>
+                <th>Nombre Cliente</th>
+                <th>Fecha de Entrega</th>
+                <th>Imagen</th>
+                <th>Chofer</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for boleta in boletas_list %}
+            <tr>
+                <td>{{ boleta.numero_orden }}</td>
+                <td>{{ boleta.nombre_cliente }}</td>
+                <td>{{ boleta.fecha_entrega }}</td>
+                <td><img src="{{ boleta.imagen_url }}" alt="Imagen de la boleta" style="max-width: 100px;"></td>
+                <td>{{ boleta.nombre_chofer }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
 </body>
-
 </html>

@@ -12,13 +12,16 @@
 }
 
 .btn-custom:hover {
-    background-color: #ff5733; /* Cambia el color de fondo al pasar el mouse */
+    background-color: #ff5733;
+    /* Cambia el color de fondo al pasar el mouse */
 }
 
 /* Estilo del footer */
 footer {
-    background-color: #141414; /* Rojo leve */
-    color: #0b0b0b; /* Texto blanco */
+    background-color: #141414;
+    /* Rojo leve */
+    color: #0b0b0b;
+    /* Texto blanco */
     position: static;
     text-align: center;
     left: 0;
@@ -33,8 +36,10 @@ footer {
 
 /* Estilo del logo en el footer */
 .footer-logo h2 {
-    font-size: 18px; /* Aumentar el tamaño del título */
-    font-weight: bold; /* Fuente negrita */
+    font-size: 18px;
+    /* Aumentar el tamaño del título */
+    font-weight: bold;
+    /* Fuente negrita */
     margin: 0;
 }
 
@@ -51,26 +56,55 @@ footer {
 
 .footer-links a {
     text-decoration: none;
-    color: #FFFFFF; /* Texto blanco */
-    font-weight: bold; /* Fuente negrita */
-    font-size: 14px; /* Aumentar el tamaño de las letras de los enlaces */
+    color: #FFFFFF;
+    /* Texto blanco */
+    font-weight: bold;
+    /* Fuente negrita */
+    font-size: 14px;
+    /* Aumentar el tamaño de las letras de los enlaces */
 }
 
 /* Estilo de la información de contacto en el footer */
 .footer-contact p {
     margin: 0;
-    margin-bottom: 5px; /* Reducir el espacio entre párrafos */
-    font-weight: bold; /* Fuente negrita */
-    font-size: 14px; /* Aumentar el tamaño de las letras */
+    margin-bottom: 5px;
+    /* Reducir el espacio entre párrafos */
+    font-weight: bold;
+    /* Fuente negrita */
+    font-size: 14px;
+    /* Aumentar el tamaño de las letras */
 }
 
 /* Estilo del texto en el footer */
 .footer-bottom p {
-    font-size: 12px; /* Tamaño del texto de derechos reservados */
+    font-size: 12px;
+    /* Tamaño del texto de derechos reservados */
 }
 
 
 #imagen_previa {
     max-width: 300px;
     max-height: 300px;
+}
+
+/* Estilos para el mensaje de bienvenida */
+.welcome-text {
+    float: left;
+    color: #928DAB;
+    margin-top: 8px;
+}
+
+.formulario-container {
+    width: 400px;
+    margin: 0 auto;
+    padding: 20px;
+    border: 2px solid #efe8e8;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    background: #1F1C2C;
+    background: -webkit-linear-gradient(to right, #afacb6, #b30b0b);
+    background: linear-gradient(to right, #b1afb8, #f1160b);
+    margin-bottom: 70px;
+    margin-top: 70px;
+
 }

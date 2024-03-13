@@ -102,11 +102,6 @@ def iniciosesion():
                 # Iniciar sesión con Firebase Authentication
                 user = auth.sign_in_with_email_and_password(email, password)
                 user_data = db.child("usuarios").child(user['localId']).get().val()
-                
-
-                if 'admin' in user_data and user_data['admin'] == True:
-                    # Usuario es un administrador, almacenar en sesión
-                    session['admin'] = True
 
                 # Almacenar el ID del usuario en la sesión
                 session['user_id'] = user['localId']
@@ -115,6 +110,8 @@ def iniciosesion():
                 session['user_email'] = email
 
                 if 'admin' in user_data and user_data['admin'] == True:
+                    # Usuario es un administrador, almacenar en sesión
+                    session['admin'] = True
                     # Usuario administrador, redirigir al panel de administrador
                     return redirect(url_for('admin_panel'))
                 else:
@@ -129,6 +126,36 @@ def iniciosesion():
         # Retornar la página de inicio de sesión en caso de solicitud GET
         return render_template('iniciosesion.html')
     
+
+@app.route('/admin_panel')
+def admin_panel():
+    if 'admin' in session and session['admin'] == True:
+        # El usuario ha iniciado sesión como administrador
+
+        try:
+            # Obtener las boletas registradas desde la base de datos
+            boletas = db.child('boletas').get().val()
+            
+            # Verificar si se obtuvieron datos de boletas
+            if boletas:
+                # Convertir el diccionario de boletas a una lista para iterar sobre ellas
+                boletas_list = [boleta for boleta_id, boleta in boletas.items()]
+            else:
+                # Si no hay boletas registradas, inicializar la lista como vacía
+                boletas_list = []
+
+            return render_template('admin_panel.html', boletas_list=boletas_list)
+        
+        except Exception as e:
+            # Manejar cualquier error que ocurra al recuperar las boletas
+            flash("Error al obtener las boletas registradas: {}".format(str(e)), "error")
+            return redirect(url_for('home'))
+        
+    else:
+        flash("Acceso no autorizado", "error")
+        return redirect(url_for('home'))
+
+
 
 # registro
 @app.route('/registro', methods=['GET', 'POST'])
