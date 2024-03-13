@@ -1,4 +1,4 @@
-import datetime
+from datetime import datetime
 import os
 import uuid
 from flask import Flask, make_response, render_template, request, redirect, session, url_for, flash
@@ -169,17 +169,18 @@ def registro():
 @app.route('/registrar_boleta', methods=['GET', 'POST'])
 def registrar_boleta():
     if verificar_autenticacion():
-        # El usuario está autenticado, obtén su ID de usuario
+        # Obtener el ID del usuario de la sesión
         user_id = session.get('user_id')
-
-        # Accede a los datos del usuario desde la base de datos en tiempo real
+        
+        # Acceder a los datos del usuario desde la base de datos en tiempo real
         user_data = db.child("usuarios").child(user_id).get().val()
 
         if user_data:
             if request.method == 'POST':
                 # Obtener los datos de la boleta del formulario
-                nombre_boleta = request.form['nombre_boleta']
-                # Obtener la imagen de la boleta del formulario
+                nombre_cliente = request.form['nombre_cliente']
+                fecha_entrega = request.form['fecha_entrega']
+                numero_orden = request.form['numero_orden']
                 imagen_boleta = request.files['imagen_boleta']
 
                 try:
@@ -188,7 +189,9 @@ def registrar_boleta():
 
                     # Guardar los datos de la boleta y los datos del chofer en la base de datos
                     db.child('boletas').push({
-                        'nombre_boleta': nombre_boleta,
+                        'nombre_cliente': nombre_cliente,
+                        'fecha_entrega': fecha_entrega,
+                        'numero_orden': numero_orden,
                         'imagen_url': imagen_url,
                         'nombre_chofer': user_data['nombre'],
                         'rut_chofer': user_data['rut'],
@@ -197,7 +200,7 @@ def registrar_boleta():
                     })
 
                     # Redireccionar a una página de éxito o a la página principal
-                    return redirect(url_for('pagina_exito'))
+                    return redirect(url_for('home'))
                 except Exception as e:
                     # Manejar errores
                     print("Error al registrar la boleta:", str(e))
