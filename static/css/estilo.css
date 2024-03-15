@@ -18,15 +18,13 @@
 
 /* Estilo del footer */
 footer {
-    background-color: #141414;
-    /* Rojo leve */
-    color: #0b0b0b;
-    /* Texto blanco */
-    position: static;
-    text-align: center;
-    left: 0;
+    background-color: #141414; /* Rojo leve */
+    color: #FFFFFF; /* Texto blanco */
+    position: fixed;
     bottom: 0;
-    /* Asegura que el footer esté por encima de otros elementos */
+    width: 100%;
+    text-align: center;
+    padding: 20px 0; /* Agrega espacio alrededor del contenido del footer */
 }
 
 /* Estilo del contenido del footer */
@@ -36,10 +34,8 @@ footer {
 
 /* Estilo del logo en el footer */
 .footer-logo h2 {
-    font-size: 18px;
-    /* Aumentar el tamaño del título */
-    font-weight: bold;
-    /* Fuente negrita */
+    font-size: 18px; /* Aumentar el tamaño del título */
+    font-weight: bold; /* Fuente negrita */
     margin: 0;
 }
 
@@ -50,41 +46,30 @@ footer {
     margin: 0;
 }
 
-/* .footer-links li {
-    margin-bottom: 5px; /* Reducir el espacio entre elementos de la lista
-} */
-
 .footer-links a {
     text-decoration: none;
-    color: #FFFFFF;
-    /* Texto blanco */
-    font-weight: bold;
-    /* Fuente negrita */
-    font-size: 14px;
-    /* Aumentar el tamaño de las letras de los enlaces */
+    color: #FFFFFF; /* Texto blanco */
+    font-weight: bold; /* Fuente negrita */
+    font-size: 14px; /* Aumentar el tamaño de las letras de los enlaces */
 }
 
 /* Estilo de la información de contacto en el footer */
 .footer-contact p {
     margin: 0;
-    margin-bottom: 5px;
-    /* Reducir el espacio entre párrafos */
-    font-weight: bold;
-    /* Fuente negrita */
-    font-size: 14px;
-    /* Aumentar el tamaño de las letras */
+    margin-bottom: 5px; /* Reducir el espacio entre párrafos */
+    font-weight: bold; /* Fuente negrita */
+    font-size: 14px; /* Aumentar el tamaño de las letras */
 }
 
 /* Estilo del texto en el footer */
 .footer-bottom p {
-    font-size: 12px;
-    /* Tamaño del texto de derechos reservados */
+    font-size: 12px; /* Tamaño del texto de derechos reservados */
 }
 
 
 #imagen_previa {
-    max-width: 300px;
-    max-height: 300px;
+    max-width: 100px;
+    max-height: 150px;
 }
 
 /* Estilos para el mensaje de bienvenida */
@@ -108,3 +93,34 @@ footer {
     margin-top: 70px;
 
 }
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    text-align: center;
+}
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+th, td {
+    padding: 10px;
+    border: 1px solid #ddd;
+}
+th {
+    background-color: #f2f2f2;
+    text-align: center;
+}
+td img {
+    max-width: 0px;
+    display: block;
+    margin: 0 auto;
+}
+

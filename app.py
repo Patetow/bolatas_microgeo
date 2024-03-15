@@ -65,7 +65,6 @@ def verificar_autenticacion():
         return False
 
 
-
 # home
 @app.route('/')
 def home():
@@ -84,7 +83,6 @@ def home():
     else:
         # Si el usuario no está autenticado, redirige a la página de inicio de sesión
         return redirect(url_for('iniciosesion'))
-
 
 
 # inicio sesion
@@ -154,7 +152,6 @@ def admin_panel():
     else:
         flash("Acceso no autorizado", "error")
         return redirect(url_for('home'))
-
 
 
 # registro
@@ -266,11 +263,6 @@ def subir_imagen(imagen):
     return None
 
 
-
-
-
-
-
 # log out
 @app.route('/logout')
 def logout():
@@ -294,7 +286,14 @@ def perfil_chofer():
         user_data = db.child("usuarios").child(user_id).get().val()
 
         if user_data:
-            return render_template('perfil_chofer.html', user=user_data)
+            # Obtener el RUT del chofer
+            rut_chofer = user_data.get('rut')
+
+            # Consultar las boletas asociadas al RUT del chofer
+            boletas_ref = db.child('boletas').order_by_child('rut_chofer').equal_to(rut_chofer).get()
+            boletas = boletas_ref.val() if boletas_ref else {}
+
+            return render_template('perfil_chofer.html', user=user_data, boletas=boletas)
         else:
             # Si no se encuentran datos del usuario, redirige a la página de inicio de sesión
             return redirect(url_for('iniciosesion'))
@@ -302,20 +301,6 @@ def perfil_chofer():
         # Si el usuario no está autenticado, redirige a la página de inicio de sesión
         return redirect(url_for('iniciosesion'))
     
-
-
-            
-
-
-
-
-
-
-
-
-
-
-
 
 
 if __name__ == '__main__':
