@@ -362,6 +362,23 @@ def eliminar_boleta(rut_chofer, boleta_numero_orden):
     return redirect(url_for('admin_panel'))
 
 
+def verificar_rut_chofer(rut_chofer, boleta_numero_orden):
+    try:
+        # Obtener la boleta desde la base de datos
+        boleta = db.child('boletas').child(boleta_numero_orden).get().val()
+        
+        # Verificar si se encontró la boleta y si tiene un campo 'rut_chofer'
+        if boleta and 'rut_chofer' in boleta:
+            # Comparar el RUT del chofer en la boleta con el RUT proporcionado en la solicitud
+            return boleta['rut_chofer'] == rut_chofer
+        else:
+            # Si la boleta no tiene un campo 'rut_chofer', devolver False
+            return False
+    except Exception as e:
+        # Manejar cualquier error que ocurra durante la verificación del RUT del chofer
+        print("Error al verificar el Rut del chofer:", str(e))
+        return False
+
 if __name__ == '__main__':
     app.debug = True
     app.run()
