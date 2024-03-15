@@ -65,6 +65,9 @@ def verificar_autenticacion():
         return False
 
 
+def is_admin():
+    return 'admin' in session and session['admin'] == True
+
 # home
 @app.route('/')
 def home():
@@ -301,6 +304,62 @@ def perfil_chofer():
         # Si el usuario no está autenticado, redirige a la página de inicio de sesión
         return redirect(url_for('iniciosesion'))
     
+
+
+
+@app.route('/editar_boleta/<boleta_id>', methods=['GET', 'POST'])
+def editar_boleta(boleta_id):
+    # Verificar si el usuario tiene permisos de administrador
+    if 'admin' in session and session['admin'] == True:
+        if request.method == 'POST':
+            # Obtener los datos enviados por el formulario de edición
+            nuevo_numero_orden = request.form['nuevo_numero_orden']
+            nuevo_nombre_cliente = request.form['nuevo_nombre_cliente']
+            nueva_fecha_entrega = request.form['nueva_fecha_entrega']
+            nuevo_nombre_chofer = request.form['nuevo_nombre_chofer']
+            
+            # Realizar la actualización en la base de datos
+            try:
+                db.child('boletas').child(boleta_id).update({
+                    'numero_orden': nuevo_numero_orden,
+                    'nombre_cliente': nuevo_nombre_cliente,
+                    'fecha_entrega': nueva_fecha_entrega,
+                    'nombre_chofer': nuevo_nombre_chofer
+                })
+                flash('Boleta actualizada correctamente', 'success')
+                return redirect(url_for('admin_panel'))
+            except Exception as e:
+                flash('Error al actualizar la boleta: {}'.format(str(e)), 'error')
+                return redirect(url_for('admin_panel'))
+        
+        # Si es una solicitud GET, mostrar el formulario de edición
+        try:
+            # Obtener los datos de la boleta a editar
+            boleta = db.child('boletas').child(boleta_id).get().val()
+            return render_template('editar_boleta.html', boleta=boleta)
+        except Exception as e:
+            flash('Error al obtener los datos de la boleta: {}'.format(str(e)), 'error')
+            return redirect(url_for('admin_panel'))
+    else:
+        flash('Acceso no autorizado', 'error')
+        return redirect(url_for('home'))
+
+
+
+@app.route('/eliminar_boleta/<rut_chofer>/<boleta_numero_orden>', methods=['POST'])
+def eliminar_boleta(rut_chofer, boleta_numero_orden):
+    if request.method == 'POST':
+        # Verificar si el Rut del chofer ingresado coincide con el de la boleta
+        if verificar_rut_chofer(rut_chofer, boleta_numero_orden):
+            try:
+                # Eliminar la boleta de la base de datos
+                db.child('boletas').child(boleta_numero_orden).remove()
+                flash('Boleta eliminada correctamente', 'success')
+            except Exception as e:
+                flash('Error al eliminar la boleta: {}'.format(str(e)), 'error')
+        else:
+            flash('El Rut del chofer ingresado no coincide con el de la boleta', 'error')
+    return redirect(url_for('admin_panel'))
 
 
 if __name__ == '__main__':
