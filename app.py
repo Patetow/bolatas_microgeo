@@ -345,21 +345,35 @@ def editar_boleta(boleta_id):
         return redirect(url_for('home'))
 
 
+def obtener_id_boleta(numero_orden):
+    # Buscar todas las boletas con el mismo número de orden
+    boletas = db.child("boletas").order_by_child("numero_orden").equal_to(numero_orden).get()
+    boleta_ids = []
+    for boleta in boletas.each():
+        boleta_id = boleta.key()
+        boleta_ids.append(boleta_id)
+    return boleta_ids  # Devolver una lista de IDs de boletas encontradas
 
-@app.route('/eliminar_boleta/<rut_chofer>/<boleta_numero_orden>', methods=['POST'])
-def eliminar_boleta(rut_chofer, boleta_numero_orden):
-    if request.method == 'POST':
-        # Verificar si el Rut del chofer ingresado coincide con el de la boleta
-        if verificar_rut_chofer(rut_chofer, boleta_numero_orden):
-            try:
-                # Eliminar la boleta de la base de datos
-                db.child('boletas').child(boleta_numero_orden).remove()
-                flash('Boleta eliminada correctamente', 'success')
-            except Exception as e:
-                flash('Error al eliminar la boleta: {}'.format(str(e)), 'error')
+@app.route("/eliminar_boleta/<numero_orden>", methods=["POST"])
+def eliminar_boleta(numero_orden):
+    try:
+        # Eliminar la boleta de la base de datos
+        boleta_ids = obtener_id_boleta(numero_orden)
+        if boleta_ids:
+            # Eliminar todas las boletas con el mismo número de orden
+            for boleta_id in boleta_ids:
+                db.child("boletas").child(boleta_id).remove()
+            print("Boleta(s) eliminada(s) correctamente")
         else:
-            flash('El Rut del chofer ingresado no coincide con el de la boleta', 'error')
-    return redirect(url_for('admin_panel'))
+            print("No se encontró ninguna boleta con ese número de orden")
+        
+        # Devolver una redirección a la página de administración después de eliminar la boleta
+        return redirect(url_for("admin_panel"))
+    
+    except Exception as e:
+        print(f"Error al eliminar boleta: {e}")
+        # Devolver una redirección a la página de administración en caso de error
+        return redirect(url_for("admin_panel"))
 
 
 def verificar_rut_chofer(rut_chofer, boleta_numero_orden):

@@ -77,20 +77,10 @@
                             style="max-width: 100px; max-height: 100px;"></td>
                     <td>{{ boleta.nombre_chofer }} - {{ boleta.rut_chofer }}</td>
                     <td>
-                        <!-- Botón para eliminar boleta -->
-                        <form method="post" action="{{ url_for('eliminar_boleta', boleta_numero_orden=boleta.numero_orden) }}" style="display: inline;" onsubmit="return confirm('¿Estás seguro de que deseas eliminar esta boleta?');">
-                            <div class="input-group">
-                                <input type="text" class="form-control" placeholder="Ingresa el RUT del chofer" name="rut_chofer">
-                                <div class="input-group-append">
-                                    <button type="submit" class="btn btn-danger btn-sm"><i class="fas fa-trash"></i> Eliminar</button>
-                                </div>
-                            </div>
+                        <!-- Formulario para eliminar la boleta -->
+                        <form method="post" action="/eliminar_boleta/{{ boleta.numero_orden }}">
+                            <button type="submit">Eliminar</button>
                         </form>
-                        
-                        
-                        <!-- Botón para editar boleta -->
-                        <a href="{{ url_for('editar_boleta', boleta_id=boleta.id) }}" class="btn btn-warning btn-sm"><i
-                                class="fas fa-edit"></i> Editar</a>
                     </td>
                 </tr>
                 {% endfor %}
@@ -99,7 +89,7 @@
     </div>
 
     <footer>
-        <div class="d-flex flex-column container pt-4">
+        <div class=" container pt-4">
             <div class="row">
                 <div class="col-md-4">
                     <div class="footer-logo fw-bold text-white">

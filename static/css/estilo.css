@@ -119,7 +119,7 @@ th {
     text-align: center;
 }
 td img {
-    max-width: 0px;
+    max-width: 100%; /* Cambiado a 100% para que las imágenes se ajusten al tamaño de su contenedor */
     display: block;
     margin: 0 auto;
 }
