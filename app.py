@@ -395,6 +395,55 @@ def verificar_rut_chofer(rut_chofer, boleta_numero_orden):
         print("Error al verificar el Rut del chofer:", str(e))
         return False
 
+@app.route('/buscar_boletas', methods=['GET', 'POST'])
+def buscar_boletas():
+    if verificar_autenticacion():
+        # Obtener la lista de choferes disponibles
+        choferes = obtener_choferes()  # Función que obtiene la lista de choferes desde la base de datos
+
+        if request.method == 'POST':
+            # Obtener el nombre del chofer seleccionado en el formulario de búsqueda
+            nombre_chofer = request.form['nombre_chofer']
+
+            # Realizar una consulta a la base de datos para obtener las boletas del chofer seleccionado
+            boletas_encontradas = obtener_boletas_por_chofer(nombre_chofer)
+        else:
+            # Si no se ha enviado un formulario, mostrar todas las boletas del primer chofer de la lista por defecto
+            primer_chofer = choferes[0] if choferes else None
+            boletas_encontradas = obtener_boletas_por_chofer(primer_chofer)
+
+        # Renderizar la plantilla de resultados de búsqueda y pasar los choferes y las boletas encontradas
+        return render_template('buscar_boletas.html', choferes=choferes, boletas_encontradas=boletas_encontradas)
+    else:
+        # Redirigir a la página de inicio de sesión si el usuario no está autenticado
+        return redirect(url_for('iniciosesion'))
+
+def obtener_boletas_por_chofer(nombre_chofer):
+    # Realizar una consulta a la base de datos para buscar las boletas del chofer dado
+    boletas_encontradas = []
+    boletas = db.child('boletas').get().val()
+
+    if boletas:
+        for boleta_id, boleta in boletas.items():
+            if boleta['nombre_chofer'] == nombre_chofer and not boleta.get('admin', False):
+                boletas_encontradas.append(boleta)
+
+    return boletas_encontradas
+
+def obtener_choferes():
+    # Obtener todos los usuarios de la base de datos
+    usuarios = db.child('usuarios').get().val()
+
+    # Inicializar una lista para almacenar los nombres de los choferes
+    choferes = []
+
+    # Verificar si existen usuarios y extraer los nombres de los choferes
+    if usuarios:
+        for uid, usuario in usuarios.items():
+            if 'nombre' in usuario and not usuario.get('admin', False):
+                choferes.append(usuario['nombre'])
+
+    return choferes
 
 
 

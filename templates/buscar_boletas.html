@@ -49,49 +49,72 @@
             <div class="container" style="position: fixed;">
 
                 <a class="nav-item btn btn-danger" href="{{url_for('logout')}}">Cerrar Sesión</a>
-                <a class="nav-item btn btn-danger" href="{{url_for('buscar_boletas')}}">buscar boletas</a>
-
+                <a class="nav-item btn btn-danger" href="{{url_for('admin_panel')}}">volver</a>
             </div>
         </section>
 
     </nav>
-    <div class="container mt-5" style="max-height: 750px; overflow-y: auto;">
-        <h1 class="mb-4">Boletas Registradas</h1>
-        <table class="table border border-secondary rounded">
-            <thead>
-                <tr>
-                    <th>Número de Orden</th>
-                    <th>Nombre Cliente</th>
-                    <th>Fecha de Entrega</th>
-                    <th>Imagen</th>
-                    <th>Chofer/rut </th>
-                    <th>Acciones</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for boleta in boletas_list %}
-                <tr>
-                    <td>{{ boleta.numero_orden }}</td>
-                    <td>{{ boleta.nombre_cliente }}</td>
-                    <td>{{ boleta.fecha_entrega }}</td>
-                    <td>
-                        <img src="{{ boleta.imagen_url }}" alt="Imagen de la boleta"
+    <div class="container mt-5">
+        <h1>Buscar Boletas por Nombre de Chofer</h1>
+        <form action="/buscar_boletas" method="post">
+            <div class="row">
+                <div class="col-md-6">
+                    <label for="nombre_chofer">Nombre del Chofer:</label>
+                    <select id="nombre_chofer" name="nombre_chofer" class="form-select" required>
+                        {% for chofer in choferes %}
+                        <option value="{{ chofer }}">{{ chofer }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="col-md-6">
+                    <button type="submit" class="btn btn-primary mt-4">Buscar</button>
+                </div>
+            </div>
+        </form>
+    </div>
+    
+    {% if boletas_encontradas %}
+    <div class="container mt-5" style="max-height: 600px; overflow-y: auto;">
+        <h2>Boletas encontradas:</h2>
+        {% for boleta in boletas_encontradas %}
+        <div class="container mt-3 border rounded p-4">
+            <h2>Perfil del Chofer</h2>
+            <div class="row">
+                <div class="col-md-6">
+                    <h3>Información Personal</h3>
+                    <ul>
+                        <li><strong>Nombre del Chofer:</strong> {{ boleta.nombre_chofer }}</li>
+                        <li><strong>RUT del Chofer:</strong> {{ boleta.rut_chofer }}</li>
+                        <li><strong>Correo del Chofer:</strong> {{ boleta.correo_chofer }}</li>
+                    </ul>
+                </div>
+                <div class="col-md-6">
+                    <h3>Información de la Boleta</h3>
+                    <ul>
+                        <li><strong>Nombre del Cliente:</strong> {{ boleta.nombre_cliente }}</li>
+                        <li><strong>Número de Orden:</strong> {{ boleta.numero_orden }}</li>
+                        <li><strong>Número de Seguimiento:</strong> {{ boleta.numero_seguimiento }}</li>
+                        <li><strong>Fecha de Entrega:</strong> {{ boleta.fecha_entrega }}</li>
+                        <li><strong>Fecha de Registro:</strong> {{ boleta.fecha_registro }}</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <h3>Imagen de la Boleta</h3>
+                    <img src="{{ boleta.imagen_url }}" alt="Imagen de la boleta"
                             style="max-width: 100px; max-height: 100px; cursor: pointer;"
                             onclick="mostrarImagenGrande(this);">
-                    </td>
-                    <td>{{ boleta.nombre_chofer }} <br>
-                        {{ boleta.rut_chofer }}</td>
-                    <td>
-                        <!-- Formulario para eliminar la boleta con confirmación -->
-                        <form id="eliminar_boleta_form_{{ boleta.numero_orden }}" method="post" action="/eliminar_boleta/{{ boleta.numero_orden }}" onsubmit="return confirm('¿Estás seguro de que quieres eliminar esta boleta?');">
-                            <button type="submit">Eliminar</button>
-                        </form>
-                    </td>
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
     </div>
+    {% else %}
+    <div class="container mt-5">
+        <p>No se encontraron boletas para este chofer.</p>
+    </div>
+    {% endif %}
     
 
     <footer>
@@ -130,15 +153,6 @@
 </body>
 
 
-
-<script>
-    function mostrarDetalles(boleta_id) {
-        // Aquí puedes agregar código para mostrar los detalles de la boleta
-        // Por ejemplo, puedes usar JavaScript para mostrar o ocultar información adicional
-        var detalles = document.getElementById('detalles' + boleta_id);
-        detalles.style.display = detalles.style.display === 'none' ? 'block' : 'none';
-    }
-</script>
 
 <script>
     function mostrarImagenGrande(imagen) {
