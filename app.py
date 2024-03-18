@@ -192,7 +192,6 @@ def registro():
     # Retornar la página de registro en caso de solicitud GET
     return render_template('registro.html')
 
-
 @app.route('/registrar_boleta', methods=['GET', 'POST'])
 def registrar_boleta():
     if verificar_autenticacion():
