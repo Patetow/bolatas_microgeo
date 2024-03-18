@@ -322,12 +322,14 @@ def editar_boleta(boleta_id):
             try:
                 # Obtener los datos enviados por el formulario de edición
                 nuevo_numero_orden = request.form['numero_orden']
+                nuevo_numero_seguimiento = request.form['numero_seguimiento']
                 nuevo_nombre_cliente = request.form['nombre_cliente']
                 nueva_fecha_entrega = request.form['fecha_entrega']
                 
                 # Realizar la actualización en la base de datos
                 db.child('boletas').child(boleta_id).update({
                     'numero_orden': nuevo_numero_orden,
+                    'numero_seguimiento': nuevo_numero_seguimiento,
                     'nombre_cliente': nuevo_nombre_cliente,
                     'fecha_entrega': nueva_fecha_entrega
                 })
@@ -361,22 +363,18 @@ def obtener_id_boleta(numero_orden):
 @app.route("/eliminar_boleta/<numero_orden>", methods=["POST"])
 def eliminar_boleta(numero_orden):
     try:
-        # Eliminar la boleta de la base de datos
         boleta_ids = obtener_id_boleta(numero_orden)
-        if boleta_ids:
-            # Eliminar todas las boletas con el mismo número de orden
+        if boleta_ids:      
             for boleta_id in boleta_ids:
                 db.child("boletas").child(boleta_id).remove()
             print("Boleta(s) eliminada(s) correctamente")
         else:
             print("No se encontró ninguna boleta con ese número de orden")
-        
-        # Devolver una redirección a la página de administración después de eliminar la boleta
+
         return redirect(url_for("admin_panel"))
     
     except Exception as e:
         print(f"Error al eliminar boleta: {e}")
-        # Devolver una redirección a la página de administración en caso de error
         return redirect(url_for("admin_panel"))
 
 

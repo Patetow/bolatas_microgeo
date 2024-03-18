@@ -63,7 +63,7 @@
                     <th>Nombre Cliente</th>
                     <th>Fecha de Entrega</th>
                     <th>Imagen</th>
-                    <th>Chofer-rut</th>
+                    <th>Chofer/rut</th>
                     <th>Acciones</th>
                 </tr>
             </thead>
@@ -78,7 +78,8 @@
                             style="max-width: 100px; max-height: 100px; cursor: pointer;"
                             onclick="mostrarImagenGrande(this);">
                     </td>
-                    <td>{{ boleta.nombre_chofer }} - {{ boleta.rut_chofer }}</td>
+                    <td>{{ boleta.nombre_chofer }} <br>
+                        {{ boleta.rut_chofer }}</td>
                     <td>
                         <!-- Formulario para eliminar la boleta con confirmación -->
                         <form id="eliminar_boleta_form_{{ boleta.numero_orden }}" method="post" action="/eliminar_boleta/{{ boleta.numero_orden }}" onsubmit="return confirm('¿Estás seguro de que quieres eliminar esta boleta?');">
