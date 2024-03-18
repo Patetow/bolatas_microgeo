@@ -208,9 +208,20 @@ def registrar_boleta():
                 nombre_cliente = request.form['nombre_cliente']
                 fecha_entrega = request.form['fecha_entrega']
                 numero_orden = request.form['numero_orden']
+                numero_seguimiento = request.form['numero_seguimiento']
                 imagen_boleta = request.files['imagen_boleta']
 
                 try:
+                    # Verificar si el número de orden ya existe
+                    orden_existente = db.child('boletas').order_by_child('numero_orden').equal_to(numero_orden).get().val()
+                    if orden_existente:
+                        raise Exception("El número de orden ya está en uso")
+
+                    # Verificar si el número de seguimiento ya existe
+                    seguimiento_existente = db.child('boletas').order_by_child('numero_seguimiento').equal_to(numero_seguimiento).get().val()
+                    if seguimiento_existente:
+                        raise Exception("El número de seguimiento ya está en uso")
+
                     # Subir la imagen de la boleta a Firebase Storage
                     imagen_url = subir_imagen(imagen_boleta)
 
@@ -219,6 +230,7 @@ def registrar_boleta():
                         'nombre_cliente': nombre_cliente,
                         'fecha_entrega': fecha_entrega,
                         'numero_orden': numero_orden,
+                        'numero_seguimiento': numero_seguimiento,
                         'imagen_url': imagen_url,
                         'nombre_chofer': user_data['nombre'],
                         'rut_chofer': user_data['rut'],
@@ -242,12 +254,11 @@ def registrar_boleta():
         # Si el usuario no está autenticado, redirige a la página de inicio de sesión
         return redirect(url_for('iniciosesion'))
 
-
 def subir_imagen(imagen):
     if imagen:
         try:
             # Genera un nombre único para la imagen
-            imagen_nombre = secure_filename
+            imagen_nombre = secure_filename(imagen.filename)  # Corrección aquí
             carpeta_destino = "imagenes_boleta"
 
             # Especifica la ubicación del archivo en el almacenamiento
@@ -264,7 +275,6 @@ def subir_imagen(imagen):
             print("Error al subir la imagen al almacenamiento:", str(e))
     
     return None
-
 
 # log out
 @app.route('/logout')
@@ -305,32 +315,28 @@ def perfil_chofer():
         return redirect(url_for('iniciosesion'))
     
 
-
-
 @app.route('/editar_boleta/<boleta_id>', methods=['GET', 'POST'])
 def editar_boleta(boleta_id):
-    # Verificar si el usuario tiene permisos de administrador
-    if 'admin' in session and session['admin'] == True:
+    # Verificar si el usuario está autenticado
+    if 'user_id' in session:
         if request.method == 'POST':
-            # Obtener los datos enviados por el formulario de edición
-            nuevo_numero_orden = request.form['nuevo_numero_orden']
-            nuevo_nombre_cliente = request.form['nuevo_nombre_cliente']
-            nueva_fecha_entrega = request.form['nueva_fecha_entrega']
-            nuevo_nombre_chofer = request.form['nuevo_nombre_chofer']
-            
-            # Realizar la actualización en la base de datos
             try:
+                # Obtener los datos enviados por el formulario de edición
+                nuevo_numero_orden = request.form['numero_orden']
+                nuevo_nombre_cliente = request.form['nombre_cliente']
+                nueva_fecha_entrega = request.form['fecha_entrega']
+                
+                # Realizar la actualización en la base de datos
                 db.child('boletas').child(boleta_id).update({
                     'numero_orden': nuevo_numero_orden,
                     'nombre_cliente': nuevo_nombre_cliente,
-                    'fecha_entrega': nueva_fecha_entrega,
-                    'nombre_chofer': nuevo_nombre_chofer
+                    'fecha_entrega': nueva_fecha_entrega
                 })
                 flash('Boleta actualizada correctamente', 'success')
-                return redirect(url_for('admin_panel'))
+                return redirect(url_for('perfil_chofer'))
             except Exception as e:
                 flash('Error al actualizar la boleta: {}'.format(str(e)), 'error')
-                return redirect(url_for('admin_panel'))
+                return redirect(url_for('perfil_chofer'))
         
         # Si es una solicitud GET, mostrar el formulario de edición
         try:
@@ -339,11 +345,10 @@ def editar_boleta(boleta_id):
             return render_template('editar_boleta.html', boleta=boleta)
         except Exception as e:
             flash('Error al obtener los datos de la boleta: {}'.format(str(e)), 'error')
-            return redirect(url_for('admin_panel'))
+            return redirect(url_for('perfil_chofer'))
     else:
-        flash('Acceso no autorizado', 'error')
-        return redirect(url_for('home'))
-
+        flash('Debe iniciar sesión para editar una boleta', 'error')
+        return redirect(url_for('iniciosesion'))
 
 def obtener_id_boleta(numero_orden):
     # Buscar todas las boletas con el mismo número de orden
