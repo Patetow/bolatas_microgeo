@@ -393,6 +393,9 @@ def verificar_rut_chofer(rut_chofer, boleta_numero_orden):
         print("Error al verificar el Rut del chofer:", str(e))
         return False
 
+
+
+
 if __name__ == '__main__':
     app.debug = True
     app.run()

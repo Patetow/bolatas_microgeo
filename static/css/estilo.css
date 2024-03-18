@@ -124,3 +124,21 @@ td img {
     margin: 0 auto;
 }
 
+.imagen {
+    cursor: pointer;
+}
+
+.imagen-grande {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    max-width: 90%;
+    max-height: 90%;
+    z-index: 9999;
+}
+
+.imagen-grande.mostrar {
+    display: block;
+}
