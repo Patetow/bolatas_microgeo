@@ -16,15 +16,27 @@
     /* Cambia el color de fondo al pasar el mouse */
 }
 
-/* Estilo del footer */
+body {
+    margin: 0;
+    padding: 0;
+}
+
+.wrapper {
+    min-height: 100vh; /* Altura mínima igual a la altura de la ventana del navegador */
+    position: relative; /* Establece un contexto de posición para el contenido */
+    padding-bottom: 60px; /* Ajusta el padding para que el contenido no se superponga con el footer */
+}
+
 footer {
-    background-color: #141414; /* Rojo leve */
-    color: #FFFFFF; /* Texto blanco */
-    position: fixed;
-    bottom: 0;
+    background-color: #141414;
+    color: #FFFFFF;
     width: 100%;
     text-align: center;
-    padding: 20px 0; /* Agrega espacio alrededor del contenido del footer */
+    padding: 20px 0;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
 }
 
 /* Estilo del contenido del footer */
@@ -66,7 +78,6 @@ footer {
     font-size: 12px; /* Tamaño del texto de derechos reservados */
 }
 
-
 #imagen_previa {
     max-width: 100px;
     max-height: 150px;
@@ -91,33 +102,31 @@ footer {
     background: linear-gradient(to right, #b1afb8, #f1160b);
     margin-bottom: 70px;
     margin-top: 70px;
-
 }
 
-body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-}
 .container {
     max-width: 800px;
     margin: 0 auto;
     padding: 20px;
     text-align: center;
 }
+
 table {
     width: 100%;
     border-collapse: collapse;
     margin-top: 20px;
 }
+
 th, td {
     padding: 10px;
     border: 1px solid #ddd;
 }
+
 th {
     background-color: #f2f2f2;
     text-align: center;
 }
+
 td img {
     max-width: 100%; /* Cambiado a 100% para que las imágenes se ajusten al tamaño de su contenedor */
     display: block;
