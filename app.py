@@ -446,6 +446,24 @@ def obtener_choferes():
     return choferes
 
 
+@app.route('/restablecer_contrasena', methods=['GET', 'POST'])
+def restablecer_contrasena():
+    if verificar_autenticacion():
+        # Si el usuario ya está autenticado, redirige a su perfil u otra página deseada
+        return redirect(url_for('home'))
+    
+    if request.method == 'POST':
+        email = request.form['email']
+        
+        try:
+            auth.send_password_reset_email(email)
+            print("Se ha enviado un enlace de restablecimiento de contraseña a tu correo electrónico.", "success")
+            return redirect(url_for('iniciosesion'))
+        except Exception as e:
+            print(f"Error al enviar el enlace de restablecimiento de contraseña: {str(e)}", "error")
+    
+    return render_template('restablecer_contrasena.html')
+
 
 if __name__ == '__main__':
     app.debug = True

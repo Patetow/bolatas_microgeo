@@ -40,43 +40,33 @@
         </section>
     </nav>
     <!-- FIN NAVBAR -->
-
-
-    <!-- Contenedor principal que alinea la imagen y el formulario -->
-    <div class="imginicio-container">
-
-        <!-- FORMULARIO -->
-        <div class="formulario-container">
-            <h2 class="text-white">Iniciar sesión</h2>
-            <form action="{{ url_for('iniciosesion') }}" method="POST">
-                <div class="form-group text-white">
-                    <label for="email">Correo Electrónico:</label>
-                    <input type="email" id="email" name="email" required>
-                </div>
-
-                <div class="form-group text-white">
-                    <label for="contrasena">Contraseña:</label>
-                    <input type="password" id="contrasena" name="contrasena" required>
-                </div>
-
-                <button type="submit" class="btn btn-success">Iniciar sesión</button>
-
-            </form>
-            <br>
-            <p class="text-white">¿No tienes una cuenta? <a href="{{ url_for('registro') }}">Registrarse</a></p>
-
-            <p class="text-white">¿Olvidaste tu contraseña? <a href="{{ url_for('restablecer_contrasena') }}">restablece tu contrseña</a></p>
+    <body>
+        <div class="imginicio-container">
+            <h2 class="text-center">Restablecer Contraseña</h2>
+            <!-- FORMULARIO -->
+            <div class="formulario-container">
+                <h2 class="text-white">Restablecer Contraseña</h2>
+                <form action="/restablecer_contrasena" method="POST">
+                    <label for="email">Correo Electrónico:</label><br>
+                    <input type="email" id="email" name="email" required><br><br>
+                    <input type="submit" value="Enviar">
+                </form>
+                <br>
+                <!-- ALERTAS -->
+                {% with messages = get_flashed_messages(with_categories=true) %}
+                    {% if messages %}
+                        {% for category, message in messages %}
+                            <div class="alert alert-{{ category }}" role="alert">
+                                {{ message }}
+                            </div>
+                        {% endfor %}
+                    {% endif %}
+                {% endwith %}
+                <!-- FIN ALERTAS -->
+            </div>
+            <!-- FIN FORMULARIO -->
         </div>
-        <!-- FIN FORMULARIO -->
-    </div>
-
-    <!-- VALIDACIÓN CREDENCIALES -->
-    <script>
-        var error_message = "{{ error_message }}";
-        if (error_message !== "") {
-            alert(error_message);
-        }
-    </script>
+    </body>
     <!-- FIN VALIDACIÓN CREDENCIALES -->
 
     <!-- FOOTER -->
