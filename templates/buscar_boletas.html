@@ -47,7 +47,7 @@
                     </svg>
                 </a>
 
-                <div class="container" style="position: absolute;">
+                <div class="container" style="position:absolute;">
 
                     <a class="nav-item btn btn-danger" href="{{url_for('logout')}}">Cerrar Sesión</a>
 
@@ -55,7 +55,9 @@
             </section>
 
         </nav>
-
+        <div class="container text-right mt-3 " >
+            <a class="btn btn-primary " href="{{url_for('admin_panel')}}">Volver</a>
+        </div>
         <div class="container mt-5 ">
             <h1>Buscar Boletas por Nombre de Chofer</h1>
             <form action="/buscar_boletas" method="post">
@@ -117,9 +119,7 @@
             <p>No se encontraron boletas para este chofer.</p>
         </div>
         {% endif %}
-        <div class="container text-right mt-3 " >
-            <a class="btn btn-primary " href="{{url_for('admin_panel')}}">Volver</a>
-        </div>
+        
         <footer>
             <div class="container pt-4">
                 <div class="row">
