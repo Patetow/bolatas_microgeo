@@ -46,10 +46,15 @@
                     </svg>
                 </a>
 
-                <div class="container" style="position:absolute;">
-
-                    <a class="nav-item btn btn-danger" href="{{url_for('logout')}}">Cerrar Sesión</a>
-
+                <div class="btn-group">
+                    {% if session.user_id %}
+                    <button type="button" class="btn btn-primary btn-lg dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                        <i class="fa-solid fa-user"></i>
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-end">
+                        <li><a class="dropdown-item" href="{{ url_for('logout') }}">Cerrar Sesión</a></li>
+                    </ul>
+                    {% endif %}
                 </div>
             </section>
 
@@ -101,7 +106,7 @@
                             <h3>Información de la Boleta</h3>
                             <ul>
                                 <li><strong>Nombre del Cliente:</strong> {{ boleta.nombre_cliente }}</li>
-                                <li><strong>Número de Orden:</strong> {{ boleta.numero_orden }}</li>
+                                <li><strong>Nota de Pedido:</strong> {{ boleta.numero_orden }}</li>
                                 <li><strong>Número de Seguimiento:</strong> {{ boleta.numero_seguimiento }}</li>
                                 <li><strong>Fecha de Entrega:</strong> {{ boleta.fecha_entrega }}</li>
                                 <li><strong>Fecha de Registro:</strong> {{ boleta.fecha_registro }}</li>

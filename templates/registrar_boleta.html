@@ -49,9 +49,10 @@
                 <div class="btn-group">
                     {% if session.user_id %}
                     <button type="button" class="btn btn-primary btn-lg dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-                        {{ user.nombre }}
+                        <i class="fa-solid fa-user"></i>
                     </button>
                     <ul class="dropdown-menu dropdown-menu-end">
+                        <li><p class="dropdown-item mb-0">{{ user.nombre }}</p></li>
                         <li><p class="dropdown-item">{{ user.rut }}</p></li>
                         <li><hr class="dropdown-divider"></li>
                         <li><a class="dropdown-item" href="{{ url_for('perfil_chofer') }}">Perfil</a></li>
@@ -67,9 +68,9 @@
 
     <body class="d-flex flex-column vh-100">
 
-        <div class="container flex-fill d-flex align-items-center mt-5">
+        <div class="container flex-fill d-flex align-items-center">
             <div class="container row justify-content-center">
-                <div class="col-md-8">
+                <div class="col-md-6 col">
                     <table class="table border border-secondary rounded">
                         <thead>
                             <tr>
@@ -79,8 +80,8 @@
                         <tbody>
                             <tr>
                                 <td colspan="2">
-                                    <div class="card">
-                                        <div class="card-body" style="max-height: 400px; overflow-y: auto;">
+                                    <div>
+                                        <div class="card-body" style="overflow-y: auto;">
                                             <form method="post" action="/registrar_boleta" enctype="multipart/form-data">
                                                 <div class="form-group">
                                                     <label for="nombre_cliente">Nombre del Cliente</label>
@@ -96,13 +97,13 @@
                                                 </div>
                                                 {% endif %}
                                                 <div class="form-group">
-                                                    <label for="numero_orden">Número de Orden</label>
+                                                    <label for="numero_orden">Nota de Pedido</label>
                                                     <input type="text" class="form-control" id="numero_orden"
                                                         name="numero_orden" value="{{ request.form['numero_orden'] }}"
                                                         required>
                                                 </div>
                                                 <div class="form-group">
-                                                    <label for="numero_seguimiento">Número de seguimiento</label>
+                                                    <label for="numero_seguimiento">Número de Seguimiento</label>
                                                     <input type="text" class="form-control" name="numero_seguimiento"
                                                         required>
                                                 </div>
@@ -135,8 +136,7 @@
                                                         value="{{ user.email }}" readonly>
                                                 </div>
 
-                                                <button type="submit" class="btn btn-primary btn-block">Registrar
-                                                    Boleta</button>
+                                                <button type="submit" class="btn btn-primary btn-block mt-3">Registrar Boleta</button>
                                             </form>
                                         </div>
                                     </div>

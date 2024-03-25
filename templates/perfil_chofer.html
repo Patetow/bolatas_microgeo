@@ -49,9 +49,10 @@
                 <div class="btn-group">
                     {% if session.user_id %}
                     <button type="button" class="btn btn-primary btn-lg dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-                        {{ user.nombre }}
+                        <i class="fa-solid fa-user"></i>
                     </button>
                     <ul class="dropdown-menu dropdown-menu-end">
+                        <li><p class="dropdown-item mb-0">{{ user.nombre }}</p></li>
                         <li><p class="dropdown-item">{{ user.rut }}</p></li>
                         <li><hr class="dropdown-divider"></li>
                         <li><a class="dropdown-item" href="{{ url_for('perfil_chofer') }}">Perfil</a></li>
@@ -93,8 +94,8 @@
                             <table class="table table-bordered table-striped mx-auto" style="width: 50%;">
                                 <thead>
                                     <tr>
-                                        <th scope="col">Número de Orden</th>
-                                        <th scope="col">Número de seguimiento</th>
+                                        <th scope="col">Nota de Pedido</th>
+                                        <th scope="col">Número de Seguimiento</th>
                                         <th scope="col">Fecha de registro</th>
                                         <th scope="col">Fecha de Entrega</th>
                                         <th scope="col">Nombre Cliente</th>
@@ -131,11 +132,11 @@
                                                     <input type="text" class="form-control" id="nombre_cliente" name="nombre_cliente" value="{{ boleta.nombre_cliente }}">
                                                 </div>
                                                 <div class="form-group">
-                                                    <label for="numero_seguimiento">Número de seguimiento</label>
+                                                    <label for="numero_seguimiento">Número de Seguimiento</label>
                                                     <input type="text" class="form-control" id="numero_seguimiento" name="numero_seguimiento" value="{{ boleta.numero_orden }}">
                                                 </div>
                                                 <div class="form-group">
-                                                    <label for="numero_orden">Número de Orden</label>
+                                                    <label for="numero_orden">Nota de Pedido</label>
                                                     <input type="text" class="form-control" id="numero_orden" name="numero_orden" value="{{ boleta.numero_seguimiento }}">
                                                 </div>
                                                 <div class="form-group">

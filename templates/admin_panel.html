@@ -46,11 +46,17 @@
                     </svg>
                 </a>
 
-                <div class="container" style="position: fixed;">
-
-                    <a class="nav-item btn btn-danger" href="{{url_for('logout')}}">Cerrar Sesión</a>
-                    <a class="nav-item btn btn-danger" href="{{url_for('buscar_boletas')}}">buscar boletas</a>
-
+                <div class="btn-group">
+                    {% if session.user_id %}
+                    <button type="button" class="btn btn-primary btn-lg dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                        <i class="fa-solid fa-user"></i>
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-end">
+                        <li><a class="dropdown-item" href="{{url_for('buscar_boletas')}}">buscar boletas</a></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item" href="{{ url_for('logout') }}">Cerrar Sesión</a></li>
+                    </ul>
+                    {% endif %}
                 </div>
             </section>
 
@@ -67,7 +73,7 @@
                 <table class="table border border-secondary rounded">
                     <thead>
                         <tr>
-                            <th>Número de Orden</th>
+                            <th>Nota de Pedido</th>
                             <th>Nombre Cliente</th>
                             <th>Fecha de Entrega</th>
                             <th>Imagen</th>

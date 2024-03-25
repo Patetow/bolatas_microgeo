@@ -42,14 +42,15 @@
                 <div class="btn-group">
                     {% if session.user_id %}
                     <button type="button" class="btn btn-primary btn-lg dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-                        {{ user.nombre }}
+                        <i class="fa-solid fa-user"></i>
                     </button>
                     <ul class="dropdown-menu dropdown-menu-end">
+                        <li><p class="dropdown-item mb-0">{{ user.nombre }}</p></li>
                         <li><p class="dropdown-item">{{ user.rut }}</p></li>
                         <li><hr class="dropdown-divider"></li>
                         <li><a class="dropdown-item" href="{{ url_for('perfil_chofer') }}">Perfil</a></li>
                         <li><hr class="dropdown-divider"></li>
-                        <li><a class="dropdown-item" href="{{ url_for('logout') }}">Cerrar Sesión<i class="fa-solid fa-power-off"></i></a></li>
+                        <li><a class="dropdown-item" href="{{ url_for('logout') }}">Cerrar Sesión</a></li>
                     </ul>
                     {% endif %}
                 </div>
