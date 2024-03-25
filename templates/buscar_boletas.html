@@ -1,24 +1,23 @@
 <!DOCTYPE html>
 <html lang="es">
 
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>admin panel</title>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+        <title>admin panel</title>
 
-    <!-- BOOTSTRAP-->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+        <!-- BOOTSTRAP-->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+        <!-- CSS -->
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/estilo.css') }}">
+    </head>
 
-    <!-- CSS -->
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/estilo.css') }}">
-</head>
+    <header>
 
-<body style="margin-bottom: 100px;">
-    <div class="wrapper">
         <nav class="navbar bg-danger fw-bold text-white" style="width: auto; height: 80px;">
             <section class="container-fluid">
                 <a href="{{ url_for('home') }}" class="logo">
@@ -55,130 +54,134 @@
             </section>
 
         </nav>
-        <div class="container text-right mt-3 " >
-            <a class="btn btn-primary " href="{{url_for('admin_panel')}}">Volver</a>
-        </div>
-        <div class="container mt-5 ">
-            <h1>Buscar Boletas por Nombre de Chofer</h1>
-            <form action="/buscar_boletas" method="post">
-                <div class="row">
-                    <div class="col-md-6">
-                        <label for="nombre_chofer">Nombre del Chofer:</label>
-                        <select id="nombre_chofer" name="nombre_chofer" class="form-select" required>
-                            {% for chofer in choferes %}
-                            <option value="{{ chofer }}">{{ chofer }}</option>
-                            {% endfor %}
-                        </select>
-                    </div>
-                    <div class="col-md-6">
-                        <button type="submit" class="btn btn-primary mt-4">Buscar</button>
-                    </div>
-                </div>
-            </form>
-        </div>
 
-        {% if boletas_encontradas %}
-        <div class="container mt-5" style="max-height: 600px; overflow-y: auto;">
-            <h2>Boletas encontradas:</h2>
-            {% for boleta in boletas_encontradas %}
-            <div class="container mt-3 border rounded p-4">
-                <h2>Perfil del Chofer</h2>
-                <div class="row">
-                    <div class="col-md-6">
-                        <h3>Información Personal</h3>
-                        <ul>
-                            <li><strong>Nombre del Chofer:</strong> {{ boleta.nombre_chofer }}</li>
-                            <li><strong>RUT del Chofer:</strong> {{ boleta.rut_chofer }}</li>
-                            <li><strong>Correo del Chofer:</strong> {{ boleta.correo_chofer }}</li>
-                        </ul>
-                    </div>
-                    <div class="col-md-6">
-                        <h3>Información de la Boleta</h3>
-                        <ul>
-                            <li><strong>Nombre del Cliente:</strong> {{ boleta.nombre_cliente }}</li>
-                            <li><strong>Número de Orden:</strong> {{ boleta.numero_orden }}</li>
-                            <li><strong>Número de Seguimiento:</strong> {{ boleta.numero_seguimiento }}</li>
-                            <li><strong>Fecha de Entrega:</strong> {{ boleta.fecha_entrega }}</li>
-                            <li><strong>Fecha de Registro:</strong> {{ boleta.fecha_registro }}</li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-12">
-                        <h3>Imagen de la Boleta</h3>
-                        <img src="{{ boleta.imagen_url }}" alt="Imagen de la boleta"
-                            style="max-width: 100px; max-height: 100px; cursor: pointer;"
-                            onclick="mostrarImagenGrande(this);">
-                    </div>
-                </div>
+    </header>
+
+    <body class="d-flex flex-column vh-100">
+        <div class="container flex-fill d-flex align-items-center wrapper">
+            
+            <div class="container text-right mt-3 " >
+                <a class="btn btn-primary " href="{{url_for('admin_panel')}}">Volver</a>
             </div>
-            {% endfor %}
-        </div>
-        {% else %}
-        <div class="container">
-            <p>No se encontraron boletas para este chofer.</p>
-        </div>
-        {% endif %}
-        
-        <footer>
-            <div class="container pt-4">
-                <div class="row">
-                    <div class="col-md-4">
-                        <div class="footer-logo fw-bold text-white">
-                            <h2>Informatica Microgeo</h2>
-                            <i class="fas fa-building"></i>
+            <div class="container mt-5 ">
+                <h1>Buscar Boletas por Nombre de Chofer</h1>
+                <form action="/buscar_boletas" method="post">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label for="nombre_chofer">Nombre del Chofer:</label>
+                            <select id="nombre_chofer" name="nombre_chofer" class="form-select" required>
+                                {% for chofer in choferes %}
+                                <option value="{{ chofer }}">{{ chofer }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <div class="col-md-6">
+                            <button type="submit" class="btn btn-primary mt-4">Buscar</button>
                         </div>
                     </div>
-                    <div class="col-md-4">
-                        <div class="footer-links">
-                            <i class="fas fa-cookie"></i>
+                </form>
+            </div>
+
+            {% if boletas_encontradas %}
+            <div class="container mt-5" style="max-height: 600px; overflow-y: auto;">
+                <h2>Boletas encontradas:</h2>
+                {% for boleta in boletas_encontradas %}
+                <div class="container mt-3 border rounded p-4">
+                    <h2>Perfil del Chofer</h2>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h3>Información Personal</h3>
                             <ul>
-                                <li><a href="#">Cookies</a></li>
-                                <li><a href="#">Aviso legal</a></li>
-                                <li><a href="#">Política de privacidad</a></li>
+                                <li><strong>Nombre del Chofer:</strong> {{ boleta.nombre_chofer }}</li>
+                                <li><strong>RUT del Chofer:</strong> {{ boleta.rut_chofer }}</li>
+                                <li><strong>Correo del Chofer:</strong> {{ boleta.correo_chofer }}</li>
+                            </ul>
+                        </div>
+                        <div class="col-md-6">
+                            <h3>Información de la Boleta</h3>
+                            <ul>
+                                <li><strong>Nombre del Cliente:</strong> {{ boleta.nombre_cliente }}</li>
+                                <li><strong>Número de Orden:</strong> {{ boleta.numero_orden }}</li>
+                                <li><strong>Número de Seguimiento:</strong> {{ boleta.numero_seguimiento }}</li>
+                                <li><strong>Fecha de Entrega:</strong> {{ boleta.fecha_entrega }}</li>
+                                <li><strong>Fecha de Registro:</strong> {{ boleta.fecha_registro }}</li>
                             </ul>
                         </div>
                     </div>
-                    <div class="col-md-4">
-                        <div class="footer-contact fw-bold text-white">
-                            <i class="fas fa-envelope"></i>
-                            <i class="fas fa-phone"></i>
-                            <p>Email: informatica@microgeo.cl</p>
-                            <p>Teléfono: +123456789</p>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h3>Imagen de la Boleta</h3>
+                            <img src="{{ boleta.imagen_url }}" alt="Imagen de la boleta"
+                                style="max-width: 100px; max-height: 100px; cursor: pointer;"
+                                onclick="mostrarImagenGrande(this);">
                         </div>
                     </div>
                 </div>
+                {% endfor %}
             </div>
-            <div class="footer-bottom fw-bold text-white text-center">
-                <p>&copy; 2024 MICROGEO | Todos Los Derechos Reservados</p>
+            {% else %}
+            <div class="container">
+                <p>No se encontraron boletas para este chofer.</p>
             </div>
-        </footer>
+            {% endif %}
+        </div>
+    
+    </body>
 
-    </div>
+    <!-- FOOTER -->
+    <footer>
+        <div class="container pt-4">
+            <div class="row align-items-center">
+                <div class="col-md-4 py-md-4">
+                    <div class="footer-logo fw-bold text-white">
+                        <h2>Informatica Microgeo</h2>
+                        <i class="fas fa-building"></i>
+                    </div>
+                </div>
+                <div class="col-md-4 py-md-4">
+                    <div class="footer-links">
+                        <i class="fas fa-cookie"></i>
+                        <ul>
+                            <li><a href="#">Cookies</a></li>
+                            <li><a href="#">Aviso legal</a></li>
+                            <li><a href="#">Política de privacidad</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md-4 py-md-4">
+                    <div class="footer-contact fw-bold text-white">
+                        <i class="fas fa-envelope"></i>
+                        <i class="fas fa-phone"></i>
+                        <p>Email: informatica@microgeo.cl</p>
+                        <p>Teléfono: +123456789</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom fw-bold text-white">
+            <p>&copy; 2024 MICROGEO | Todos Los Derechos Reservados</p>
+        </div>
+    </footer>
+    <!-- FIN FOOTER -->
 
-</body>
+    <script>
+        function mostrarImagenGrande(imagen) {
+            var imagenGrande = document.createElement("img");
+            imagenGrande.src = imagen.src;
+            imagenGrande.classList.add("imagen-grande");
+            document.body.appendChild(imagenGrande);
 
+            imagenGrande.onclick = function () {
+                imagenGrande.classList.remove("mostrar");
+                setTimeout(function () {
+                    document.body.removeChild(imagenGrande);
+                }, 200);
+            };
 
-
-<script>
-    function mostrarImagenGrande(imagen) {
-        var imagenGrande = document.createElement("img");
-        imagenGrande.src = imagen.src;
-        imagenGrande.classList.add("imagen-grande");
-        document.body.appendChild(imagenGrande);
-
-        imagenGrande.onclick = function () {
-            imagenGrande.classList.remove("mostrar");
             setTimeout(function () {
-                document.body.removeChild(imagenGrande);
-            }, 200);
-        };
-
-        setTimeout(function () {
-            imagenGrande.classList.add("mostrar");
-        }, 10);
-    }
-</script>
-
+                imagenGrande.classList.add("mostrar");
+            }, 10);
+        }
+    </script>
 
 </html>
