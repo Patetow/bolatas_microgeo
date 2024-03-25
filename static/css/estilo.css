@@ -32,8 +32,6 @@ footer {
     color: #FFFFFF;
     width: 100%;
     text-align: center;
-    padding: 20px 0;
-    position: fixed;
     bottom: 0;
     left: 0;
     right: 0;
@@ -91,17 +89,13 @@ footer {
 }
 
 .formulario-container {
-    width: 400px;
     margin: 0 auto;
     padding: 20px;
     border: 2px solid #efe8e8;
-    border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     background: #1F1C2C;
-    background: -webkit-linear-gradient(to right, #afacb6, #b30b0b);
-    background: linear-gradient(to right, #b1afb8, #f1160b);
-    margin-bottom: 70px;
-    margin-top: 70px;
+    background: -webkit-linear-gradient(to right, #afacb6, #dc3545);
+    background: linear-gradient(to right, #b1afb8, #dc3545);
 }
 
 .container {
