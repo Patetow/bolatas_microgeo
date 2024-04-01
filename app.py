@@ -25,7 +25,7 @@ firebaseConfig = {
     }
 
 
-cred = credentials.Certificate("C:/Users/patricio.toro/Desktop/bolatas_microgeo/static/json/boletasmicreo-firebase-adminsdk-qmus6-ddf535662a.json")
+cred = credentials.Certificate("C:/Users/Microgeo/Desktop/bolatas_microgeo/static/json/boletasmicreo-firebase-adminsdk-qmus6-ddf535662a.json")
 
 
 
@@ -67,6 +67,15 @@ def verificar_autenticacion():
 
 def is_admin():
     return 'admin' in session and session['admin'] == True
+
+
+@app.route('/visualizarRegistro/<notaPedido>')
+def visualizarRegistro(notaPedido):
+    print(notaPedido)
+    resultados = db.child("boletas").order_by_child("numero_orden").equal_to(notaPedido).get().val()
+    print(resultados)
+    return render_template('visualizarRegistro.html', resultados=resultados)
+
 
 # home
 @app.route('/')
@@ -199,17 +208,18 @@ def registrar_boleta():
         user_id = session.get('user_id')
         
         # Acceder a los datos del usuario desde la base de datos en tiempo real
-        user_data = db.child("usuarios").child(user_id).get().val()
+        user_data = True
 
         if user_data:
             if request.method == 'POST':
                 # Obtener los datos de la boleta del formulario
-                nombre_cliente = request.form['nombre_cliente']
                 fecha_entrega = request.form['fecha_entrega']
                 numero_orden = request.form['numero_orden']
-                numero_seguimiento = request.form['numero_seguimiento']
+                codigo_seguimiento = request.form['codigo_seguimiento']
+                nombre_transporte = request.form['nombre_transporte']
+                patente_vehiculo = request.form['patente_vehiculo']
+                #nombre_chofer = request.form['nombre_chofer']
                 imagen_boleta = request.files['imagen_boleta']
-
                 try:
                     # Verificar si el número de orden ya existe
                     orden_existente = db.child('boletas').order_by_child('numero_orden').equal_to(numero_orden).get().val()
@@ -217,7 +227,7 @@ def registrar_boleta():
                         raise Exception("El número de orden ya está en uso")
 
                     # Verificar si el número de seguimiento ya existe
-                    seguimiento_existente = db.child('boletas').order_by_child('numero_seguimiento').equal_to(numero_seguimiento).get().val()
+                    seguimiento_existente = db.child('boletas').order_by_child('codigo_seguimiento').equal_to(codigo_seguimiento).get().val()
                     if seguimiento_existente:
                         raise Exception("El número de seguimiento ya está en uso")
 
@@ -226,15 +236,14 @@ def registrar_boleta():
 
                     # Guardar los datos de la boleta y los datos del chofer en la base de datos
                     db.child('boletas').push({
-                        'nombre_cliente': nombre_cliente,
                         'fecha_entrega': fecha_entrega,
                         'numero_orden': numero_orden,
-                        'numero_seguimiento': numero_seguimiento,
+                        'codigo_seguimiento': codigo_seguimiento,
+                        'nombre_transporte': nombre_transporte,
+                        'patente_vehiculo': patente_vehiculo,
+                        #'nombre_chofer': nombre_chofer,
                         'imagen_url': imagen_url,
-                        'nombre_chofer': user_data['nombre'],
-                        'rut_chofer': user_data['rut'],
-                        'correo_chofer': user_data['email'],
-                        'fecha_registro': datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+                        #'fecha_registro': datetime.now().strftime('%Y-%m-%d %H:%M:%S')
                     })
 
                     # Redireccionar a una página de éxito o a la página principal

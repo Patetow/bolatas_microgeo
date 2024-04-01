@@ -73,27 +73,28 @@
                 <table class="table border border-secondary rounded">
                     <thead>
                         <tr>
+                            <th>Fecha Registro</th>
                             <th>Nota de Pedido</th>
-                            <th>Nombre Cliente</th>
-                            <th>Fecha de Entrega</th>
+                            <th>Codigo Seguimiento</th>
+                            <th>Transporte</th>
+                            <th>Patente</th>
                             <th>Imagen</th>
-                            <th>Chofer/rut </th>
                             <th>Acciones</th>
                         </tr>
                     </thead>
                     <tbody>
                         {% for boleta in boletas_list %}
                         <tr>
-                            <td>{{ boleta.numero_orden }}</td>
-                            <td>{{ boleta.nombre_cliente }}</td>
                             <td>{{ boleta.fecha_entrega }}</td>
+                            <td>{{ boleta.numero_orden }}</td>
+                            <td>{{ boleta.codigo_seguimiento }}</td>
+                            <td>{{ boleta.nombre_transporte}}</td>
+                            <td>{{ boleta.patente_vehiculo}}</td>
                             <td>
                                 <img src="{{ boleta.imagen_url }}" alt="Imagen de la boleta"
                                     style="max-width: 100px; max-height: 100px; cursor: pointer;"
                                     onclick="mostrarImagenGrande(this);">
                             </td>
-                            <td>{{ boleta.nombre_chofer }} <br>
-                                {{ boleta.rut_chofer }}</td>
                             <td>
                                 <!-- Formulario para eliminar la boleta con confirmación -->
                                 <form id="eliminar_boleta_form_{{ boleta.numero_orden }}" method="post"
