@@ -97,24 +97,32 @@
                                                 <input type="date" class="form-control" name="fecha_entrega" required>
                                             </div>
                                             {% if error_message_numero_orden %}
-                                                <div class="alert alert-danger" role="alert">
-                                                    {{ error_message_numero_orden }}
-                                                </div>
-                                                {% endif %}
+                                            <div class="alert alert-danger" role="alert">
+                                                {{ error_message_numero_orden }}
+                                            </div>
+                                            {% endif %}
                                             <div class="form-group">
                                                 <label for="numero_orden">Nota de Pedido</label>
                                                 <input type="text" class="form-control" name="numero_orden" required>
                                             </div>
                                             <div class="form-group">
-                                                <label for="codigo_seguimiento">Codigo Seguimiento</label>
+                                                <label for="codigo_seguimiento">Codigo de Seguimiento OT</label>
                                                 <input type="text" class="form-control" name="codigo_seguimiento"
                                                     required>
                                             </div>
 
+
+
                                             <div class="form-group">
-                                                <label for="nombre_chofer">Nombre Transporte</label>
-                                                <input type="text" class="form-control" name="nombre_transporte">
+                                                <label for="nombre_transporte">Nombre del transporte</label>
+                                                <select class="form-select" aria-label="Default select example" id="nombre_transporte" name="nombre_transporte">
+                                                    <option selected>Seleccione un transporte</option>
+                                                    {% for transporte in transportes %}
+                                                    <option value="{{transporte}}">{{transporte}}</option>
+                                                    {% endfor %}
+                                                </select>
                                             </div>
+
 
                                             <div class="form-group">
                                                 <label for="rut_chofer">Patente</label>

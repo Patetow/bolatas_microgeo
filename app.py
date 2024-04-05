@@ -25,7 +25,7 @@ firebaseConfig = {
     }
 
 
-cred = credentials.Certificate("C:/Users/Microgeo/Desktop/bolatas_microgeo/static/json/boletasmicreo-firebase-adminsdk-qmus6-ddf535662a.json")
+cred = credentials.Certificate("static/json/boletasmicreo-firebase-adminsdk-qmus6-ddf535662a.json")
 
 
 
@@ -252,9 +252,14 @@ def registrar_boleta():
                     # Manejar errores
                     print("Error al registrar la boleta:", str(e))
                     flash("Error al registrar la boleta. Inténtalo de nuevo.", "error")
-            
+
+                                
+            transportes = db.child('transportes').get().val()
+            lista_nombres_transporte = []
+            for key, value in transportes.items():
+                lista_nombres_transporte.append(value['nombreTransporte'])
             # Si el método de la solicitud es GET, renderizar el formulario de registro de boleta
-            return render_template('registrar_boleta.html', user=user_data)
+            return render_template('registrar_boleta.html', user=user_data, transportes=sorted(lista_nombres_transporte))
         else:
             # Si no se encuentran datos del usuario, redirige a la página de inicio de sesión
             return redirect(url_for('iniciosesion'))
