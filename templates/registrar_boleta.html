@@ -115,12 +115,13 @@
 
                                             <div class="form-group">
                                                 <label for="nombre_transporte">Nombre del transporte</label>
-                                                <select class="form-select" aria-label="Default select example" id="nombre_transporte" name="nombre_transporte">
-                                                    <option selected>Seleccione un transporte</option>
+                                                <input type="text" class="form-control" name="nombre_transporte" id="nombre_transporte"
+                                                    required list="datalistOptions">
+                                                <datalist id="datalistOptions">
                                                     {% for transporte in transportes %}
-                                                    <option value="{{transporte}}">{{transporte}}</option>
+                                                    <option value="{{transporte}}"></option>
                                                     {% endfor %}
-                                                </select>
+                                                </datalist>
                                             </div>
 
 
